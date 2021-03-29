@@ -1,0 +1,6 @@
+framework module Pods_SpotifyRebuild {
+  umbrella header "Pods-SpotifyRebuild-umbrella.h"
+
+  export *
+  module * { export * }
+}
