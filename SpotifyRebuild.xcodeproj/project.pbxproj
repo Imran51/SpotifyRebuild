@@ -31,6 +31,7 @@
 		8E78370A25F8C2BE00D8E8D1 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E78370925F8C2BE00D8E8D1 /* UserProfile.swift */; };
 		8E78370E25F8DE1900D8E8D1 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E78370D25F8DE1900D8E8D1 /* UIView.swift */; };
 		8E78371125F8ED0800D8E8D1 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E78371025F8ED0800D8E8D1 /* AuthResponse.swift */; };
+		8EB3C7CC2611F03A00BABEBE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3C7CB2611F03A00BABEBE /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		8E78370925F8C2BE00D8E8D1 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		8E78370D25F8DE1900D8E8D1 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		8E78371025F8ED0800D8E8D1 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		8EB3C7CB2611F03A00BABEBE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				8E78370625F8C28B00D8E8D1 /* Artist.swift */,
 				8E78370925F8C2BE00D8E8D1 /* UserProfile.swift */,
 				8E78371025F8ED0800D8E8D1 /* AuthResponse.swift */,
+				8EB3C7CB2611F03A00BABEBE /* Settings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				8E7836D725F8C01200D8E8D1 /* TabBarViewController.swift in Sources */,
 				8E7836FE25F8C22D00D8E8D1 /* HapticsManager.swift in Sources */,
 				8E7836BF25F89CBD00D8E8D1 /* HomeViewController.swift in Sources */,
+				8EB3C7CC2611F03A00BABEBE /* Settings.swift in Sources */,
 				8E78371125F8ED0800D8E8D1 /* AuthResponse.swift in Sources */,
 				8E78370425F8C26E00D8E8D1 /* AudioTrack.swift in Sources */,
 				8E7836FB25F8C20800D8E8D1 /* ApiManager.swift in Sources */,

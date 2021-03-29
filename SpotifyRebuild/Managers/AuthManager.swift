@@ -10,6 +10,8 @@ import Foundation
 final class AuthManager {
     static let shared = AuthManager()
 
+    private var refreshingToken = false
+
     struct Constants {
         static let clientID = "b898aac108a74de0935ec659c7f7db0c"
         static let clientSecret = "77bdb413800b46bcba3c0c97c13c738b"
@@ -92,17 +94,42 @@ final class AuthManager {
         task.resume()
     }
 
+    private var onRefreshBlocks = [((String) -> Void)]()
+
+    public func validToken(completion: @escaping(String) -> Void) {
+        guard !refreshingToken else {
+            onRefreshBlocks.append(completion)
+            return
+        }
+
+        if shouldRefreshToken {
+            refreshIfNeeded { [weak self] success in
+                if let token = self?.accessToken, success {
+                    completion(token)
+                }
+
+            }
+        } else if let token = accessToken {
+            completion(token)
+        }
+    }
+
     public func refreshIfNeeded(completion: @escaping (Bool) -> Void) {
-//        guard shouldRefreshToken else {
-//            completion(true)
-//            return
-//        }
+        guard !refreshingToken else {
+            return
+        }
+        guard shouldRefreshToken else {
+            completion(true)
+            return
+        }
 
         guard let refreshToken = self.refreshToken else {
             return
         }
 
         guard let url = URL(string: Constants.tokenApiURL) else { return }
+
+        refreshingToken = true
 
         var components = URLComponents()
         components.queryItems = [
@@ -123,15 +150,17 @@ final class AuthManager {
         }
         request.setValue("Basic \(base64String)", forHTTPHeaderField: "Authorization")
 
-        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+        let task = URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
+            self?.refreshingToken = false
             guard let data = data, error == nil else {
                 completion(false)
                 return
             }
             do {
                 let result = try JSONDecoder().decode(AuthResponse.self, from: data)
-                self.cacheToken(result: result)
-                print(result)
+                self?.onRefreshBlocks.forEach { $0(result.access_token) }
+                self?.onRefreshBlocks.removeAll()
+                self?.cacheToken(result: result)
                 completion(true)
             } catch {
                 print(error.localizedDescription)
