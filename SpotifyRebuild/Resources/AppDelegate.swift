@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,6 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+        AppCenter.start(withAppSecret: "c3e27bc2-ce67-46ae-8617-b9dd7a927ede", services:[
+          Analytics.self,
+          Crashes.self
+        ])
 
         let window = UIWindow(frame: UIScreen.main.bounds)
         

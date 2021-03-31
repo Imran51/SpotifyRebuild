@@ -58,6 +58,7 @@ class ProfileViewController: UIViewController {
         dataModels.append("Email Address: \(model.email)")
         dataModels.append("User ID: \(model.id)")
         dataModels.append("Plan: \(model.product)")
+        createtableHeader(with: model.images.first?.url)
 
         tableView.reloadData()
     }

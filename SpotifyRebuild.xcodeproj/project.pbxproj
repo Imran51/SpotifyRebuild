@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -33,6 +33,9 @@
 		8E78370E25F8DE1900D8E8D1 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E78370D25F8DE1900D8E8D1 /* UIView.swift */; };
 		8E78371125F8ED0800D8E8D1 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E78371025F8ED0800D8E8D1 /* AuthResponse.swift */; };
 		8EB3C7CC2611F03A00BABEBE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3C7CB2611F03A00BABEBE /* Settings.swift */; };
+		8EF493CD26147AC300EFB7E9 /* AppCenter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF493CC26147AC300EFB7E9 /* AppCenter.xcframework */; };
+		8EF493CF26147AC300EFB7E9 /* AppCenterAnalytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF493CE26147AC300EFB7E9 /* AppCenterAnalytics.xcframework */; };
+		8EF493D126147AC300EFB7E9 /* AppCenterCrashes.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF493D026147AC300EFB7E9 /* AppCenterCrashes.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,9 @@
 		8E78370D25F8DE1900D8E8D1 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		8E78371025F8ED0800D8E8D1 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		8EB3C7CB2611F03A00BABEBE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		8EF493CC26147AC300EFB7E9 /* AppCenter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AppCenter.xcframework; path = "Pods/AppCenter/AppCenter-SDK-Apple/AppCenter.xcframework"; sourceTree = "<group>"; };
+		8EF493CE26147AC300EFB7E9 /* AppCenterAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AppCenterAnalytics.xcframework; path = "Pods/AppCenter/AppCenter-SDK-Apple/AppCenterAnalytics.xcframework"; sourceTree = "<group>"; };
+		8EF493D026147AC300EFB7E9 /* AppCenterCrashes.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AppCenterCrashes.xcframework; path = "Pods/AppCenter/AppCenter-SDK-Apple/AppCenterCrashes.xcframework"; sourceTree = "<group>"; };
 		8F56CB3A2BB86F26EDE27E9E /* Pods-SpotifyRebuild.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyRebuild.release.xcconfig"; path = "Target Support Files/Pods-SpotifyRebuild/Pods-SpotifyRebuild.release.xcconfig"; sourceTree = "<group>"; };
 		C56C3C434F03E18E0DFABCDB /* Pods-SpotifyRebuild.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyRebuild.debug.xcconfig"; path = "Target Support Files/Pods-SpotifyRebuild/Pods-SpotifyRebuild.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +79,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EF493CD26147AC300EFB7E9 /* AppCenter.xcframework in Frameworks */,
+				8EF493CF26147AC300EFB7E9 /* AppCenterAnalytics.xcframework in Frameworks */,
+				8EF493D126147AC300EFB7E9 /* AppCenterCrashes.xcframework in Frameworks */,
 				0D78848E54B937EDBC5E9F7E /* Pods_SpotifyRebuild.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,13 +218,15 @@
 				C56C3C434F03E18E0DFABCDB /* Pods-SpotifyRebuild.debug.xcconfig */,
 				8F56CB3A2BB86F26EDE27E9E /* Pods-SpotifyRebuild.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		CEFA9ADBF6BA5E63107ECF47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8EF493CC26147AC300EFB7E9 /* AppCenter.xcframework */,
+				8EF493CE26147AC300EFB7E9 /* AppCenterAnalytics.xcframework */,
+				8EF493D026147AC300EFB7E9 /* AppCenterCrashes.xcframework */,
 				65BFA00B4FEBF56E82E62450 /* Pods_SpotifyRebuild.framework */,
 			);
 			name = Frameworks;

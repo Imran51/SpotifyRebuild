@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AppCenter
+import AppCenterCrashes
 
 class TabBarViewController: UITabBarController {
 
@@ -13,6 +15,10 @@ class TabBarViewController: UITabBarController {
         super.viewDidLoad()
 
         setupViewControllers()
+        
+        AppCenter.start(withAppSecret: "c3e27bc2-ce67-46ae-8617-b9dd7a927ede", services:[
+          Crashes.self
+        ])
     }
 
     private func setupViewControllers() {

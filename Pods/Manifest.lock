@@ -1,4 +1,12 @@
 PODS:
+  - AppCenter (4.1.1):
+    - AppCenter/Analytics (= 4.1.1)
+    - AppCenter/Crashes (= 4.1.1)
+  - AppCenter/Analytics (4.1.1):
+    - AppCenter/Core
+  - AppCenter/Core (4.1.1)
+  - AppCenter/Crashes (4.1.1):
+    - AppCenter/Core
   - Appirater (2.3.1)
   - Firebase/Analytics (6.21.0):
     - Firebase/Core
@@ -71,12 +79,14 @@ PODS:
   - SDWebImage/Core (5.10.4)
 
 DEPENDENCIES:
+  - AppCenter
   - Appirater
   - Firebase/Analytics
   - SDWebImage
 
 SPEC REPOS:
   trunk:
+    - AppCenter
     - Appirater
     - Firebase
     - FirebaseAnalytics
@@ -93,6 +103,7 @@ SPEC REPOS:
     - SDWebImage
 
 SPEC CHECKSUMS:
+  AppCenter: cd53e3ed3563cc720bcb806c9731a12389b40d44
   Appirater: 44a4651f7912a17dc906b655f0c215d5bb768b84
   Firebase: f378c80340dd41c0ad0914af740c021eb282a04b
   FirebaseAnalytics: a1a0b3327ceb5cd5b4bacffdb293f6c909aa087d
@@ -108,6 +119,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
 
-PODFILE CHECKSUM: 278c3bc5fd758b9475dc0d34b53f390ce749866f
+PODFILE CHECKSUM: a650bcac6249dba2c92f4b62beae63eb66e8f92e
 
 COCOAPODS: 1.10.1
