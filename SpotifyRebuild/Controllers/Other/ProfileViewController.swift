@@ -23,7 +23,11 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
 
         self.title = "Profile"
-        self.view.backgroundColor = .systemBackground
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = .systemBackground
+        } else {
+            self.view.backgroundColor = .white
+        }
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -85,7 +89,11 @@ class ProfileViewController: UIViewController {
         let label = UILabel(frame: .zero)
         label.text = "Failed to load profile."
         label.sizeToFit()
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .cyan
+        }
         view.addSubview(label)
         label.center = view.center
     }

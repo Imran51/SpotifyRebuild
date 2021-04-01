@@ -10,11 +10,17 @@ import WebKit
 
 class LoginViewController: UIViewController, WKNavigationDelegate {
     private let webView: WKWebView = {
-        let pref = WKWebpagePreferences()
-        pref.allowsContentJavaScript = true
-        let config = WKWebViewConfiguration()
-        config.defaultWebpagePreferences = pref
-        let webView = WKWebView(frame: .zero, configuration: config)
+        if #available(iOS 14.0, *) {
+            let pref = WKWebpagePreferences()
+            pref.allowsContentJavaScript = true
+            let config = WKWebViewConfiguration()
+            config.defaultWebpagePreferences = pref
+            let webView = WKWebView(frame: .zero, configuration: config)
+
+            return webView
+        }
+
+        let webView = WKWebView(frame: .zero)
 
         return webView
     }()
@@ -25,7 +31,11 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
 
         self.title = "Sign In"
-        self.view.backgroundColor = .systemBackground
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = .systemBackground
+        } else {
+            self.view.backgroundColor = .white
+        }
         webView.navigationDelegate = self
         self.view.addSubview(self.webView)
         guard let url = AuthManager.shared.signInURL else { return }
