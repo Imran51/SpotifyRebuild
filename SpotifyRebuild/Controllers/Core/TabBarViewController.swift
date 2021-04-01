@@ -39,6 +39,16 @@ class TabBarViewController: UITabBarController {
         let libraryNav = UINavigationController(rootViewController: library)
 
         if #available(iOS 13.0, *) {
+            homeNav.navigationBar.tintColor = .label
+            searchNav.navigationBar.tintColor = .label
+            libraryNav.navigationBar.tintColor = .label
+        } else {
+            homeNav.navigationBar.tintColor = .white
+            searchNav.navigationBar.tintColor = .white
+            libraryNav.navigationBar.tintColor = .white
+        }
+
+        if #available(iOS 13.0, *) {
             homeNav.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 1)
             searchNav.tabBarItem = UITabBarItem(title: "Library", image: UIImage(systemName: "magnifyingglass"), tag: 1)
             libraryNav.tabBarItem = UITabBarItem(title: "Library", image: UIImage(systemName: "music.note.list"), tag: 1)

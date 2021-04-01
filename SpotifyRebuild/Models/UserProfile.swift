@@ -19,6 +19,4 @@ struct UserProfile: Codable {
     let images: [UserImage]
 }
 
-struct UserImage: Codable {
-    let url: String
-}
+

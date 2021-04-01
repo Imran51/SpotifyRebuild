@@ -32,6 +32,10 @@
 		8E78370A25F8C2BE00D8E8D1 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E78370925F8C2BE00D8E8D1 /* UserProfile.swift */; };
 		8E78370E25F8DE1900D8E8D1 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E78370D25F8DE1900D8E8D1 /* UIView.swift */; };
 		8E78371125F8ED0800D8E8D1 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E78371025F8ED0800D8E8D1 /* AuthResponse.swift */; };
+		8EA7AE3F2615E09900F01286 /* NewReleasesReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7AE3E2615E09900F01286 /* NewReleasesReponse.swift */; };
+		8EA7AE422615E1C500F01286 /* UserImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7AE412615E1C500F01286 /* UserImage.swift */; };
+		8EA7AE452615E59D00F01286 /* FeaturedPlaylistsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7AE442615E59D00F01286 /* FeaturedPlaylistsResponse.swift */; };
+		8EA7AE482615F56300F01286 /* RecommendationGenresResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7AE472615F56300F01286 /* RecommendationGenresResponse.swift */; };
 		8EB3C7CC2611F03A00BABEBE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3C7CB2611F03A00BABEBE /* Settings.swift */; };
 		8EF493CD26147AC300EFB7E9 /* AppCenter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF493CC26147AC300EFB7E9 /* AppCenter.xcframework */; };
 		8EF493CF26147AC300EFB7E9 /* AppCenterAnalytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF493CE26147AC300EFB7E9 /* AppCenterAnalytics.xcframework */; };
@@ -66,6 +70,10 @@
 		8E78370925F8C2BE00D8E8D1 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		8E78370D25F8DE1900D8E8D1 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		8E78371025F8ED0800D8E8D1 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		8EA7AE3E2615E09900F01286 /* NewReleasesReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReleasesReponse.swift; sourceTree = "<group>"; };
+		8EA7AE412615E1C500F01286 /* UserImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImage.swift; sourceTree = "<group>"; };
+		8EA7AE442615E59D00F01286 /* FeaturedPlaylistsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedPlaylistsResponse.swift; sourceTree = "<group>"; };
+		8EA7AE472615F56300F01286 /* RecommendationGenresResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationGenresResponse.swift; sourceTree = "<group>"; };
 		8EB3C7CB2611F03A00BABEBE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		8EF493CC26147AC300EFB7E9 /* AppCenter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AppCenter.xcframework; path = "Pods/AppCenter/AppCenter-SDK-Apple/AppCenter.xcframework"; sourceTree = "<group>"; };
 		8EF493CE26147AC300EFB7E9 /* AppCenterAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AppCenterAnalytics.xcframework; path = "Pods/AppCenter/AppCenter-SDK-Apple/AppCenterAnalytics.xcframework"; sourceTree = "<group>"; };
@@ -147,6 +155,10 @@
 				8E78370925F8C2BE00D8E8D1 /* UserProfile.swift */,
 				8E78371025F8ED0800D8E8D1 /* AuthResponse.swift */,
 				8EB3C7CB2611F03A00BABEBE /* Settings.swift */,
+				8EA7AE3E2615E09900F01286 /* NewReleasesReponse.swift */,
+				8EA7AE412615E1C500F01286 /* UserImage.swift */,
+				8EA7AE442615E59D00F01286 /* FeaturedPlaylistsResponse.swift */,
+				8EA7AE472615F56300F01286 /* RecommendationGenresResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -350,14 +362,17 @@
 				8E7836E625F8C0FD00D8E8D1 /* WelcomeViewController.swift in Sources */,
 				8E7836EC25F8C13300D8E8D1 /* ProfileViewController.swift in Sources */,
 				8E7836DB25F8C08200D8E8D1 /* SearchViewController.swift in Sources */,
+				8EA7AE3F2615E09900F01286 /* NewReleasesReponse.swift in Sources */,
 				8E7836D725F8C01200D8E8D1 /* TabBarViewController.swift in Sources */,
 				8E7836FE25F8C22D00D8E8D1 /* HapticsManager.swift in Sources */,
 				8E7836BF25F89CBD00D8E8D1 /* HomeViewController.swift in Sources */,
 				8EB3C7CC2611F03A00BABEBE /* Settings.swift in Sources */,
+				8EA7AE422615E1C500F01286 /* UserImage.swift in Sources */,
 				8E78371125F8ED0800D8E8D1 /* AuthResponse.swift in Sources */,
 				8E78370425F8C26E00D8E8D1 /* AudioTrack.swift in Sources */,
 				8E7836FB25F8C20800D8E8D1 /* ApiManager.swift in Sources */,
 				8E78370E25F8DE1900D8E8D1 /* UIView.swift in Sources */,
+				8EA7AE482615F56300F01286 /* RecommendationGenresResponse.swift in Sources */,
 				8E78370125F8C25700D8E8D1 /* PlayList.swift in Sources */,
 				8E7836BB25F89CBD00D8E8D1 /* AppDelegate.swift in Sources */,
 				8E78370A25F8C2BE00D8E8D1 /* UserProfile.swift in Sources */,
@@ -367,6 +382,7 @@
 				8E7836BD25F89CBD00D8E8D1 /* SceneDelegate.swift in Sources */,
 				8E7836EF25F8C15E00D8E8D1 /* PlayerViewController.swift in Sources */,
 				8E7836F525F8C19600D8E8D1 /* SearchResultViewController.swift in Sources */,
+				8EA7AE452615E59D00F01286 /* FeaturedPlaylistsResponse.swift in Sources */,
 				8E7836E925F8C11F00D8E8D1 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
