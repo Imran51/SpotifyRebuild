@@ -13,6 +13,8 @@
 		8E0A705526171FC3001B197C /* FeaturedPlaylistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A705426171FC3001B197C /* FeaturedPlaylistCollectionViewCell.swift */; };
 		8E0A705826171FF0001B197C /* RecommendedTrackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A705726171FF0001B197C /* RecommendedTrackCollectionViewCell.swift */; };
 		8E0A705B26172588001B197C /* NewReleasesCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A705A26172588001B197C /* NewReleasesCellViewModel.swift */; };
+		8E6BC20926198AB800501FBD /* FeaturedPlaylistCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BC20826198AB800501FBD /* FeaturedPlaylistCellViewModel.swift */; };
+		8E6BC20C26198B3A00501FBD /* RecommendedTrackCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BC20B26198B3A00501FBD /* RecommendedTrackCellViewModel.swift */; };
 		8E7836BB25F89CBD00D8E8D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7836BA25F89CBD00D8E8D1 /* AppDelegate.swift */; };
 		8E7836BD25F89CBD00D8E8D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7836BC25F89CBD00D8E8D1 /* SceneDelegate.swift */; };
 		8E7836BF25F89CBD00D8E8D1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7836BE25F89CBD00D8E8D1 /* HomeViewController.swift */; };
@@ -54,6 +56,8 @@
 		8E0A705426171FC3001B197C /* FeaturedPlaylistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedPlaylistCollectionViewCell.swift; sourceTree = "<group>"; };
 		8E0A705726171FF0001B197C /* RecommendedTrackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedTrackCollectionViewCell.swift; sourceTree = "<group>"; };
 		8E0A705A26172588001B197C /* NewReleasesCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReleasesCellViewModel.swift; sourceTree = "<group>"; };
+		8E6BC20826198AB800501FBD /* FeaturedPlaylistCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedPlaylistCellViewModel.swift; sourceTree = "<group>"; };
+		8E6BC20B26198B3A00501FBD /* RecommendedTrackCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedTrackCellViewModel.swift; sourceTree = "<group>"; };
 		8E7836B725F89CBD00D8E8D1 /* SpotifyRebuild.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotifyRebuild.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E7836BA25F89CBD00D8E8D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E7836BC25F89CBD00D8E8D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -182,6 +186,8 @@
 				8EA7AE472615F56300F01286 /* RecommendationGenresResponse.swift */,
 				8E0A704A2616F56A001B197C /* RecommendationsResponse.swift */,
 				8E0A705A26172588001B197C /* NewReleasesCellViewModel.swift */,
+				8E6BC20826198AB800501FBD /* FeaturedPlaylistCellViewModel.swift */,
+				8E6BC20B26198B3A00501FBD /* RecommendedTrackCellViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -384,7 +390,9 @@
 				8E7836F825F8C1F700D8E8D1 /* AuthManager.swift in Sources */,
 				8E7836E625F8C0FD00D8E8D1 /* WelcomeViewController.swift in Sources */,
 				8E0A705B26172588001B197C /* NewReleasesCellViewModel.swift in Sources */,
+				8E6BC20C26198B3A00501FBD /* RecommendedTrackCellViewModel.swift in Sources */,
 				8E7836EC25F8C13300D8E8D1 /* ProfileViewController.swift in Sources */,
+				8E6BC20926198AB800501FBD /* FeaturedPlaylistCellViewModel.swift in Sources */,
 				8E7836DB25F8C08200D8E8D1 /* SearchViewController.swift in Sources */,
 				8EA7AE3F2615E09900F01286 /* NewReleasesReponse.swift in Sources */,
 				8E7836D725F8C01200D8E8D1 /* TabBarViewController.swift in Sources */,
