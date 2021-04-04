@@ -8,11 +8,21 @@
 import UIKit
 
 class PlayListViewController: UIViewController {
+    private let playlist:Playlist
+
+    init(playlist: Playlist) {
+        self.playlist = playlist
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        title = playlist.name
+        view.backgroundColor = .systemBackground
     }
     
 
