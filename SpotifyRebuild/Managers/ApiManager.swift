@@ -59,6 +59,46 @@ final class ApiManager {
             task.resume()
         }
     }
+    
+    //MARK:- Category
+    public func getCategories(completion: @escaping (Result<[Category],Error>) -> Void) {
+        createRequest(withUrl: URL(string: Constants.baseAPIURL + "/browse/categories?limit=20"), type: .GET) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _ , error in
+                guard let data = data , error == nil else {
+                    completion(.failure(APIError.failedToGetData))
+
+                    return
+                }
+                do {
+                    let result = try JSONDecoder().decode(AllCategoriesResponse.self, from: data)
+                    completion(.success(result.categories.items))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    public func getCategoryPlaylist(category: Category, completion: @escaping (Result<[Playlist],Error>) -> Void) {
+        createRequest(withUrl: URL(string: Constants.baseAPIURL + "/browse/categories/\(category.id)/playlists?limit=20"), type: .GET) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _ , error in
+                guard let data = data , error == nil else {
+                    completion(.failure(APIError.failedToGetData))
+
+                    return
+                }
+                do {
+                    let result = try JSONDecoder().decode(CatrgoryPlaylistsResponse.self, from: data)
+                    completion(.success(result.playlists.items))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+    
     public func getCurrentProfile(completion: @escaping (Result<UserProfile, Error>) -> Void) {
         createRequest(withUrl: URL(string: Constants.baseAPIURL + "/me"), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
