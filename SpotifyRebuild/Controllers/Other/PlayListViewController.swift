@@ -102,7 +102,7 @@ class PlayListViewController: UIViewController {
     }
     
     @objc private func didtapShare() {
-        guard let url = URL(string: playlist.external_urls["spotify"] as? String ?? "") else { return }
+        guard let url = URL(string: playlist.external_urls["spotify"] ?? "") else { return }
         let vc = UIActivityViewController(
             activityItems: ["Check out this cool playlist I found",url],
             applicationActivities: []
