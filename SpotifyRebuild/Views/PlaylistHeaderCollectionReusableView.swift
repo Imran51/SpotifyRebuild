@@ -20,7 +20,6 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .semibold)
-        //label.numberOfLines = 0
 
         return label
     }()
@@ -38,7 +37,6 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .light)
         label.textColor = .secondaryLabel
-        //label.numberOfLines = 0
 
         return label
     }()
@@ -66,11 +64,13 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
+        
         addSubview(imageView)
         addSubview(nameLabel)
         addSubview(descriptionLabel)
         addSubview(ownerLabel)
         addSubview(playAllButton)
+        
         playAllButton.addTarget(self, action: #selector(didTapPlayAll), for: .touchUpInside)
     }
     

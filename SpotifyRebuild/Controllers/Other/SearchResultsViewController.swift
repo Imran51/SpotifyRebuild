@@ -24,14 +24,17 @@ class SearchResultsViewController: UIViewController {
     
     private let tableview: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "searchResult")
+        
+        tableView.register(SearchResultDefaultTableViewCell.self, forCellReuseIdentifier: SearchResultDefaultTableViewCell.identifier)
+        tableView.register(SearchResultSubtitleTableViewCell.self, forCellReuseIdentifier: SearchResultSubtitleTableViewCell.identifier)
         tableView.isHidden = true
+        
         return tableView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .clear
         view.addSubview(tableview)
         tableview.delegate = self
@@ -81,8 +84,9 @@ class SearchResultsViewController: UIViewController {
         tableview.reloadData()
         tableview.isHidden = results.isEmpty
     }
-
 }
+
+// MARK:- Tableview datasource and delegate implementation
 
 extension SearchResultsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -95,19 +99,58 @@ extension SearchResultsViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let result = sections[indexPath.section].results[indexPath.row]
         
-        let cell = tableview.dequeueReusableCell(withIdentifier: "searchResult", for: indexPath)
         switch result {
-        case .artist(model: let model):
-            cell.textLabel?.text = model.name
-        case .album(model: let model):
-            cell.textLabel?.text = model.name
-        case .playlist(model: let model):
-            cell.textLabel?.text = model.name
-        case .track(model: let model):
-            cell.textLabel?.text = model.name
+        case .artist(model: let artist):
+            guard let artistCell = tableview.dequeueReusableCell(
+                withIdentifier: SearchResultDefaultTableViewCell.identifier, for: indexPath
+            ) as? SearchResultDefaultTableViewCell else {
+                return UITableViewCell() }
+            let viewModel = SearchResultDefaultTableViewCellViewModel(
+                title: artist.name,
+                imageURL: URL(string: artist.images?.first?.url ?? ""))
+            artistCell.configure(with: viewModel)
+            
+            return artistCell
+            
+        case .album(model: let album):
+            guard let albumCell = tableview.dequeueReusableCell(
+                withIdentifier: SearchResultSubtitleTableViewCell.identifier, for: indexPath
+            ) as? SearchResultSubtitleTableViewCell else {
+                return UITableViewCell() }
+            let viewModel = SearchResultSubtitleTableViewCellViewModel(
+                title: album.name,
+                subtitle: album.artists.first?.name ?? "",
+                imageURL: URL(string: album.images.first?.url ?? ""))
+            albumCell.configure(with: viewModel)
+            
+            return albumCell
+            
+        case .playlist(model: let playlist):
+            guard let playlistCell = tableview.dequeueReusableCell(
+                withIdentifier: SearchResultSubtitleTableViewCell.identifier, for: indexPath
+            ) as? SearchResultSubtitleTableViewCell else {
+                return UITableViewCell() }
+            let viewModel = SearchResultSubtitleTableViewCellViewModel(
+                title: playlist.name,
+                subtitle: playlist.owner.display_name,
+                imageURL: URL(string: playlist.images.first?.url ?? ""))
+            playlistCell.configure(with: viewModel)
+            
+            return playlistCell
+            
+        case .track(model: let track):
+            guard let trackCell = tableview.dequeueReusableCell(
+                withIdentifier: SearchResultSubtitleTableViewCell.identifier, for: indexPath
+            ) as? SearchResultSubtitleTableViewCell else {
+                return UITableViewCell() }
+            let viewModel = SearchResultSubtitleTableViewCellViewModel(
+                title: track.name,
+                subtitle: track.artists.first?.name ?? "-",
+                imageURL: URL(string: track.album?.images.first?.url ?? ""))
+            trackCell.configure(with: viewModel)
+            
+            return trackCell
         }
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

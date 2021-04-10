@@ -8,9 +8,75 @@
 import UIKit
 
 class AlbumViewController: UIViewController {
+    
     private let album: Album
     
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: {(_,_) -> NSCollectionLayoutSection? in
+        return AlbumViewController.createCollectionViewLayoutSection()
+    }))
+    
+    private var viewModels = [AlbumCollectionCellViewModel]()
+    
+    init(album: Album) {
+        self.album = album
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = album.name
+        view.backgroundColor = .systemBackground
+        intializeCollectionView()
+        fetchAlbumDetails()
+    }
+    
+    private func intializeCollectionView() {
+        view.addSubview(collectionView)
+        collectionView.register(
+            AlbumTrackCollectionViewCell.self,
+            forCellWithReuseIdentifier: AlbumTrackCollectionViewCell.identifier
+        )
+        collectionView.register(
+            PlaylistHeaderCollectionReusableView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: PlaylistHeaderCollectionReusableView.identifier
+        )
+        
+        collectionView.backgroundColor = .systemBackground
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+    
+    private func fetchAlbumDetails() {
+        ApiManager.shared.getAlbumDetails(for: album){[weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let model):
+                    self?.viewModels = model.tracks.items.compactMap({
+                        AlbumCollectionCellViewModel(
+                            name: $0.name,
+                            artistName: $0.artists.first?.name ?? "-"
+                        )
+                    })
+                    self?.collectionView.reloadData()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.frame = view.bounds
+    }
+    
+    private static func createCollectionViewLayoutSection() -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
@@ -41,66 +107,10 @@ class AlbumViewController: UIViewController {
         ]
         
         return section
-    }))
-    
-    private var viewModels = [AlbumCollectionCellViewModel]()
-    
-    init(album: Album) {
-        self.album = album
-        super.init(nibName: nil, bundle: nil)
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = album.name
-        view.backgroundColor = .systemBackground
-        view.addSubview(collectionView)
-        collectionView.register(
-            AlbumTrackCollectionViewCell.self,
-            forCellWithReuseIdentifier: AlbumTrackCollectionViewCell.identifier
-        )
-        collectionView.register(
-            PlaylistHeaderCollectionReusableView.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: PlaylistHeaderCollectionReusableView.identifier
-        )
-        collectionView.backgroundColor = .systemBackground
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        configureAlbumDetails()
-    }
-    
-    private func configureAlbumDetails() {
-        ApiManager.shared.getAlbumDetails(for: album){[weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let model):
-                    self?.viewModels = model.tracks.items.compactMap({
-                        AlbumCollectionCellViewModel(
-                            name: $0.name,
-                            artistName: $0.artists.first?.name ?? "-"
-                        )
-                    })
-                    self?.collectionView.reloadData()
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-        }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        collectionView.frame = view.bounds
-    }
-    
-    
-    
 }
+
+// MARK: CollectionView delegate and datasource implementation
 
 extension AlbumViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -145,10 +155,10 @@ extension AlbumViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
 }
 
+// MARK:- Playlist Header CollectionReusable ViewDelegate implementation
+
 extension AlbumViewController: PlaylistHeaderCollectionReusableViewDelegate {
     func playlistHeaderCollectionReusableViewDidTapPlayAll(_ header: PlaylistHeaderCollectionReusableView) {
         print("tapped")
     }
-    
-    
 }

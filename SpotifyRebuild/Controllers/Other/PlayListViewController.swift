@@ -9,38 +9,9 @@ import UIKit
 
 class PlayListViewController: UIViewController {
     private let playlist:Playlist
-
+    
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: {(_,_) -> NSCollectionLayoutSection? in
-        let item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(1.0)
-            )
-        )
-        item.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 2, bottom: 1, trailing: 2)
-
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(60)
-            ),
-            subitem: item,
-            count: 1
-        )
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [
-            NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .fractionalWidth(1.0)
-                ),
-                elementKind: UICollectionView.elementKindSectionHeader,
-                alignment: .top
-            )
-        ]
-
-        return section
+        return PlayListViewController.createCollectionViewSectionLayout()
     }))
     
     private var viewModels = [RecommendedTrackCellViewModel]()
@@ -49,15 +20,20 @@ class PlayListViewController: UIViewController {
         self.playlist = playlist
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = playlist.name
         view.backgroundColor = .systemBackground
+        initalizeCollectionView()
+        fetchPlaylist()
+    }
+    
+    private func initalizeCollectionView() {
         view.addSubview(collectionView)
         collectionView.register(
             RecommendedTrackCollectionViewCell.self,
@@ -68,10 +44,10 @@ class PlayListViewController: UIViewController {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: PlaylistHeaderCollectionReusableView.identifier
         )
+        
         collectionView.backgroundColor = .systemBackground
         collectionView.delegate = self
         collectionView.dataSource = self
-        fetchPlaylist()
     }
     
     override func viewDidLayoutSubviews() {
@@ -80,8 +56,8 @@ class PlayListViewController: UIViewController {
     }
     
     private func fetchPlaylist() {
-            ApiManager.shared.getPlaylistDetails(for: self.playlist) {[weak self] result in
-                DispatchQueue.main.async {
+        ApiManager.shared.getPlaylistDetails(for: self.playlist) {[weak self] result in
+            DispatchQueue.main.async {
                 switch result {
                 case .success(let model):
                     self?.viewModels = model.tracks.items.compactMap({
@@ -110,7 +86,42 @@ class PlayListViewController: UIViewController {
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(vc,animated: true)
     }
+    
+    private static func createCollectionViewSectionLayout() -> NSCollectionLayoutSection {
+        let item = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .fractionalHeight(1.0)
+            )
+        )
+        item.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 2, bottom: 1, trailing: 2)
+        
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .absolute(60)
+            ),
+            subitem: item,
+            count: 1
+        )
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [
+            NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .fractionalWidth(1.0)
+                ),
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .top
+            )
+        ]
+        
+        return section
+    }
 }
+
+// MARK:- CollectionView delegate and datasource implementation
 
 extension PlayListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -130,11 +141,11 @@ extension PlayListViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-       
+        
         guard let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: PlaylistHeaderCollectionReusableView.identifier,
-                for: indexPath
+            ofKind: kind,
+            withReuseIdentifier: PlaylistHeaderCollectionReusableView.identifier,
+            for: indexPath
         ) as? PlaylistHeaderCollectionReusableView, kind == UICollectionView.elementKindSectionHeader else {
             return UICollectionReusableView()
         }
@@ -153,8 +164,9 @@ extension PlayListViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
     }
-    
 }
+
+// MARK:- PlaylistHeaderCollectionReusableViewDelegate implementaion to play all songs
 
 extension PlayListViewController: PlaylistHeaderCollectionReusableViewDelegate {
     func playlistHeaderCollectionReusableViewDidTapPlayAll(_ header: PlaylistHeaderCollectionReusableView) {

@@ -91,5 +91,4 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         return model.title
     }
-
 }

@@ -99,6 +99,7 @@ class ProfileViewController: UIViewController {
     }
 }
 
+// MARK:- Tableview delegate and datasource implementation
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -113,6 +114,4 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle =  .none
         return cell
     }
-
-
 }

@@ -43,8 +43,6 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     ]
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        backgroundColor = .secondarySystemBackground
-//        contentView.backgroundColor = .secondarySystemBackground
         contentView.layer.cornerRadius = 8
         contentView.layer.masksToBounds = true
         

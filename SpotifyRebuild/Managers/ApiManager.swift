@@ -14,6 +14,15 @@ final class ApiManager {
 
     struct Constants {
         static let baseAPIURL = "https://api.spotify.com/v1"
+        static let profileURL = baseAPIURL + "/me"
+        static let albumsURL = baseAPIURL + "/albums/"
+        static let playlistsURL = baseAPIURL + "/playlists/"
+        static let categoriesURL = baseAPIURL + "/browse/categories?limit=20"
+        static let searchURL = baseAPIURL + "/search?limit=10&type=album,artist,playlist,track"
+        static let newReleasesURL = baseAPIURL + "/browse/new-releases?limit=50"
+        static let featuredPlaylistsURL = baseAPIURL + "/browse/featured-playlists?limit=20"
+        static let recommendationsURL = baseAPIURL + "/recommendations?limit=20&seed_genres"
+        static let recommendationGenres = baseAPIURL + "/recommendations/available-genre-seeds"
     }
 
     enum APIError: Error {
@@ -23,7 +32,7 @@ final class ApiManager {
     // MARK:- Album
     
     public func getAlbumDetails(for album: Album, completion: @escaping (Result<AlbumDetailsResponse,Error>) -> Void) {
-        createRequest(withUrl: URL(string: Constants.baseAPIURL + "/albums/" + album.id), type: .GET) { request in
+        createRequest(withUrl: URL(string: Constants.albumsURL + album.id), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _ , error in
                 guard let data = data , error == nil else {
                     completion(.failure(APIError.failedToGetData))
@@ -44,7 +53,7 @@ final class ApiManager {
     // MARK:- Playlists
     
     public func getPlaylistDetails(for playlist: Playlist, completion: @escaping (Result<PlaylistDetailsResponse,Error>) -> Void) {
-        createRequest(withUrl: URL(string: Constants.baseAPIURL + "/playlists/" + playlist.id), type: .GET) { request in
+        createRequest(withUrl: URL(string: Constants.playlistsURL + playlist.id), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _ , error in
                 guard let data = data , error == nil else {
                     completion(.failure(APIError.failedToGetData))
@@ -65,7 +74,7 @@ final class ApiManager {
     // MARK:- Category
     
     public func getCategories(completion: @escaping (Result<[Category],Error>) -> Void) {
-        createRequest(withUrl: URL(string: Constants.baseAPIURL + "/browse/categories?limit=20"), type: .GET) { request in
+        createRequest(withUrl: URL(string: Constants.categoriesURL), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _ , error in
                 guard let data = data , error == nil else {
                     completion(.failure(APIError.failedToGetData))
@@ -86,7 +95,7 @@ final class ApiManager {
     // MARK:- Search Api
     
     public func search(with query: String, completion: @escaping (Result<[SearchResult],Error>) -> Void) {
-        createRequest(withUrl: URL(string: Constants.baseAPIURL + "/search?limit=10&type=album,artist,playlist,track&q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"), type: .GET) { request in
+        createRequest(withUrl: URL(string: "\(Constants.searchURL)&q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _ , error in
                 guard let data = data , error == nil else {
                     completion(.failure(APIError.failedToGetData))
@@ -131,7 +140,7 @@ final class ApiManager {
     }
     
     public func getCurrentProfile(completion: @escaping (Result<UserProfile, Error>) -> Void) {
-        createRequest(withUrl: URL(string: Constants.baseAPIURL + "/me"), type: .GET) { request in
+        createRequest(withUrl: URL(string: Constants.profileURL), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
                 guard let data = data, error == nil else {
                     completion(.failure(APIError.failedToGetData))
@@ -151,7 +160,7 @@ final class ApiManager {
     }
 
     public func getNewReleases(completion: @escaping ((Result<NewReleasesResponse, Error>)) -> Void) {
-        createRequest(withUrl: URL(string: Constants.baseAPIURL + "/browse/new-releases?limit=50"), type: .GET) { request in
+        createRequest(withUrl: URL(string: Constants.newReleasesURL), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _ , error in
                 guard let data = data , error == nil else {
                     completion(.failure(APIError.failedToGetData))
@@ -170,7 +179,7 @@ final class ApiManager {
     }
 
     public func getFeaturedPlaylists(completion: @escaping (Result<FeaturedPlaylistsResponse,Error>) -> Void) {
-        createRequest(withUrl: URL(string: Constants.baseAPIURL + "/browse/featured-playlists?limit=20"), type: .GET) { request in
+        createRequest(withUrl: URL(string: Constants.featuredPlaylistsURL), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _ , error in
                 guard let data = data , error == nil else {
                     completion(.failure(APIError.failedToGetData))
@@ -191,7 +200,7 @@ final class ApiManager {
 
     public func getRecommendations(genres: Set<String>,completion: @escaping (Result<RecommendationsResponse,Error>) -> Void) {
         let seeds = genres.joined(separator: ",")
-        createRequest(withUrl: URL(string: Constants.baseAPIURL + "/recommendations?limit=20&seed_genres=\(seeds)"), type: .GET) { request in
+        createRequest(withUrl: URL(string:  "\(Constants.recommendationsURL)=\(seeds)"), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _ , error in
                 guard let data = data , error == nil else {
                     completion(.failure(APIError.failedToGetData))
@@ -210,7 +219,7 @@ final class ApiManager {
     }
 
     public func getRecommendationGenres(completion: @escaping (Result<RecommendationGenresResponse,Error>) -> Void) {
-        createRequest(withUrl: URL(string: Constants.baseAPIURL + "/recommendations/available-genre-seeds"), type: .GET) { request in
+        createRequest(withUrl: URL(string: Constants.recommendationGenres), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _ , error in
                 guard let data = data , error == nil else {
                     completion(.failure(APIError.failedToGetData))
@@ -245,7 +254,7 @@ final class ApiManager {
         }
     }
 
-    enum HTTPMethod: String {
+    private enum HTTPMethod: String {
         case GET
         case POST
         case PUT
