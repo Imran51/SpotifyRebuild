@@ -17,11 +17,11 @@ final class ApiManager {
         static let profileURL = baseAPIURL + "/me"
         static let albumsURL = baseAPIURL + "/albums/"
         static let playlistsURL = baseAPIURL + "/playlists/"
-        static let categoriesURL = baseAPIURL + "/browse/categories?limit=20"
+        static let categoriesURL = baseAPIURL + "/browse/categories?limit=40"
         static let searchURL = baseAPIURL + "/search?limit=10&type=album,artist,playlist,track"
         static let newReleasesURL = baseAPIURL + "/browse/new-releases?limit=50"
-        static let featuredPlaylistsURL = baseAPIURL + "/browse/featured-playlists?limit=20"
-        static let recommendationsURL = baseAPIURL + "/recommendations?limit=20&seed_genres"
+        static let featuredPlaylistsURL = baseAPIURL + "/browse/featured-playlists?limit=40"
+        static let recommendationsURL = baseAPIURL + "/recommendations?limit=30&seed_genres"
         static let recommendationGenres = baseAPIURL + "/recommendations/available-genre-seeds"
     }
 
@@ -121,7 +121,7 @@ final class ApiManager {
     }
     
     public func getCategoryPlaylist(category: Category, completion: @escaping (Result<[Playlist],Error>) -> Void) {
-        createRequest(withUrl: URL(string: Constants.baseAPIURL + "/browse/categories/\(category.id)/playlists?limit=20"), type: .GET) { request in
+        createRequest(withUrl: URL(string: Constants.baseAPIURL + "/browse/categories/\(category.id)/playlists?limit=40"), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _ , error in
                 guard let data = data , error == nil else {
                     completion(.failure(APIError.failedToGetData))
